@@ -1,6 +1,3 @@
-import numpy as np
-
-
 class F2Matrix(object):
     def __init__(self, matrix):
         self.matrix = matrix

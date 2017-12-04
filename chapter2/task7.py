@@ -1,7 +1,7 @@
 # coding=utf-8
 import numpy as np
 
-from data.f2_matrix import F2Matrix
+from utils.f2_matrix import F2Matrix
 
 
 def multiply(msg, matrix):

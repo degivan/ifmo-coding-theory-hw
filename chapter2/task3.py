@@ -1,4 +1,4 @@
-from data.f2_matrix import F2Matrix
+from utils.f2_matrix import F2Matrix
 
 
 class Order(object):
