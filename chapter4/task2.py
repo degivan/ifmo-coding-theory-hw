@@ -6,7 +6,7 @@ from utils.decoder import Decoder, generate_sequences, np_to_str
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 10 ** 3
+N = 3 * (10 ** 2)
 
 
 def spoil_codeword(codeword, p):
@@ -39,15 +39,22 @@ def bit_error_probability(p, matrix):
     return diff / float((N * k * (2 ** k)))
 
 
+def count_p(val):
+    return 1 - norm.cdf(np.sqrt(2 * val))
+
+
 if __name__ == '__main__':
-    matrix = np.array([[0, 1, 0, 1, 1, 0, 1, 0, 0, 0],
-              [1, 0, 1, 1, 1, 0, 0, 1, 0, 0],
-              [0, 1, 1, 0, 1, 1, 0, 0, 1, 0],
-              [1, 0, 1, 0, 1, 1, 0, 0, 0, 1]])
+    matrix = np.array([[1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+                       [0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
+                       [0, 0, 1, 0, 0, 0, 0, 1, 1, 1],
+                       [0, 0, 0, 1, 0, 0, 1, 1, 0, 0],
+                       [0, 0, 0, 0, 1, 0, 1, 1, 1, 1],
+                       [0, 0, 0, 0, 0, 1, 0, 0, 1, 1]]
+                      )
     X = []
     Y = []
     for val in [0.1 * (i + 2) for i in range(70)]:
-        p = 1 - norm.cdf(np.sqrt(2 * val))
+        p = count_p(val)
         X.append(10 * np.log10(val))
         Y.append(bit_error_probability(p, matrix))
     print X
